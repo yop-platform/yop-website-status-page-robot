@@ -1,7 +1,7 @@
 name: Audit live site 
 on: 
   schedule:
-    - cron: "30 * * * *"
+    - cron: "50 13 * * *"
 
 jobs:
   build:
@@ -16,3 +16,12 @@ jobs:
       with: 
         name: report 
         path: './report' 
+    - name: actions-feishu
+      uses: xiachufang/actions-feishu@v1.2
+      with:
+        webhook: ${{ secrets.FEISHU_WEBHOOK }}
+        title: 吃了吗?🍚
+        content: |
+          I'm message body
+
+          from: ${{ github.repository }}
